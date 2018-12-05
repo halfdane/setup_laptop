@@ -1,6 +1,6 @@
 ---
 
-- name: Install keepass packages
+- name: Install direnv packages
   become: true
   apt:
     name: "{{ packages }}"
@@ -20,18 +20,7 @@
     src: '{{ playbook_dir }}/resources/private_envrc.j2'
     dest: '{{ ansible_env.HOME }}/private/.envrc'
 
-
-- name: Ensure otto directory
-  file:
-    dest: '{{ ansible_env.HOME }}/otto'
-    state: directory
-
-- name: Use otto direnv config
-  template:
-    src: '{{ playbook_dir }}/resources/otto_envrc.j2'
-    dest: '{{ ansible_env.HOME }}/otto/.envrc'
-
 - name: Put yubikey in place
   copy:
     src: '{{ playbook_dir }}/resources/yubikey_pub.j2'
-    dest: '{{ ansible_env.HOME }}/otto/.envrc'
+    dest: '{{ ansible_env.HOME }}/.ssh'
