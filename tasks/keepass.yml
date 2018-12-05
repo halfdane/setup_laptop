@@ -1,0 +1,19 @@
+---
+
+- name: install keepass addon repo
+  become: true
+  apt_repository:
+    repo: ppa:dlech/keepass2-plugins
+    state: present
+
+
+- name: Install keepass packages
+  become: true
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - keepass2
+    - keepass2-plugin-application-indicator
+    - xdotool

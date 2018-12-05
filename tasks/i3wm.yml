@@ -1,0 +1,27 @@
+---
+- name: Install i3wm
+  become: true
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - vim
+    - curl
+    - i3-wm
+    - rofi
+
+- name: Ensure i3 config directory
+  file:
+    dest: '{{ ansible_env.HOME }}/.config/plasma-workspace/env'
+    state: directory
+
+- name: Use i3 as kde wm
+  copy:
+    dest: '{{ ansible_env.HOME }}/.config/plasma-workspace/env/wm.sh'
+    content: 'export KDEWM=/usr/bin/i3'
+
+- name: Use i3 config
+  template:
+    src: '{{ playbook_dir }}/resources/i3_config.j2'
+    dest: '{{ ansible_env.HOME }}/.config/i3/config'
