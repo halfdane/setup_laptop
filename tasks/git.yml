@@ -1,0 +1,32 @@
+---
+
+- name: Install keepass packages
+  become: true
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - git
+    - direnv
+
+- name: Ensure private directory
+  file:
+    dest: '{{ ansible_env.HOME }}/private'
+    state: directory
+
+- name: Use private direnv config
+  template:
+    src: '{{ playbook_dir }}/resources/private_envrc.j2'
+    dest: '{{ ansible_env.HOME }}/private/.envrc'
+
+
+- name: Ensure otto directory
+  file:
+    dest: '{{ ansible_env.HOME }}/otto'
+    state: directory
+
+- name: Use otto direnv config
+  template:
+    src: '{{ playbook_dir }}/resources/otto_envrc.j2'
+    dest: '{{ ansible_env.HOME }}/otto/.envrc'

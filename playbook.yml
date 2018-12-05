@@ -10,8 +10,8 @@
       changed_when: False
     - setup: # aka gather_facts
 
-
   tasks:
     - include: tasks/dropbox.yml
     - include: tasks/i3wm.yml
     - include: tasks/keepass.yml
+    - include: tasks/git.yml
