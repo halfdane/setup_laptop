@@ -9,6 +9,7 @@
     packages:
     - git
     - direnv
+    - pinentry-qt
 
 - name: Ensure private directory
   file:
@@ -23,4 +24,5 @@
 - name: Put yubikey in place
   copy:
     src: '{{ playbook_dir }}/resources/yubikey_pub.j2'
-    dest: '{{ ansible_env.HOME }}/.ssh'
+    dest: '{{ ansible_env.HOME }}/.ssh/id_rsa_yubikey.pub'
+    mode: 0600
