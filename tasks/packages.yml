@@ -1,0 +1,11 @@
+---
+
+- name: Install all kinds of packages
+  become: true
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - vim
+    - libreoffice
