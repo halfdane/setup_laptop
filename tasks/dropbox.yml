@@ -49,6 +49,7 @@
 
 - name: dropbox | Check dropboxd status
   command: dropbox status
+  changed_when: False
   register: status
 
 - name: dropbox | Start dropboxd
