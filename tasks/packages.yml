@@ -9,3 +9,6 @@
     packages:
     - vim
     - libreoffice
+    - gcc
+    - build-essential
+    - linux-headers-{{ ansible_kernel }}
