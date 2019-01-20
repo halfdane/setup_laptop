@@ -2,26 +2,32 @@
 #download bundle
 #wget http://www.vmware.com/go/tryplayerpro-linux-64 -O /tmp/vmware-player.bundle
 
-- name: Check if bundle is already present
+- name: vmplayer | Check if bundle is already present
   stat:
     path: "{{ ansible_env.HOME }}/Downloads/vmware-player.bundle"
   register: vmware_bundle
 
-- name: download vmware_player bundle
+- name: vmplayer | download vmware_player bundle
   get_url:
     url: 'http://download3.vmware.com/software/player/file/VMware-Player-15.0.2-10952284.x86_64.bundle'
     dest: "{{ ansible_env.HOME }}/Downloads/vmware-player.bundle"
     force: no
   when: vmware_bundle.stat.exists == false
 
-- name: Make bundle executable
+- name: vmplayer | Make bundle executable
   file:
     path: "{{ ansible_env.HOME }}/Downloads/vmware-player.bundle"
     mode: a+x
 
-- name: execute bundle as sudo
+- name: vmplayer | Check if binary is already present
+  stat:
+    path: "/usr/bin/vmplayer"
+  register: vmware_binary
+
+- name: vmplayer | install binary as sudo
   command: "{{ ansible_env.HOME }}/Downloads/vmware-player.bundle --console --required --eulas-agreed"
   become: true
+  when: vmware_binary.stat.exists == false
 
 
 
