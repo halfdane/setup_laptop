@@ -12,9 +12,10 @@
 
   tasks:
     - include: tasks/packages.yml
-    - include: tasks/dropbox.yml
+      #    - include: tasks/dropbox.yml
     - include: tasks/i3wm.yml
     - include: tasks/keepass.yml
     - include: tasks/git.yml
     - include: tasks/insomnia.yml
     - include: tasks/vmware_player.yml
+    - include: tasks/atom.yml

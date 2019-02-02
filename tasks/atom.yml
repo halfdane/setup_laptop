@@ -1,0 +1,18 @@
+---
+- name: atom | add apt key
+  become: true
+  apt_key:
+    url: https://packagecloud.io/AtomEditor/atom/gpgkey
+
+- name: atom | add ppa 
+  lineinfile:
+    path: /etc/apt/sources.list.d/atom.list
+    line: deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main
+    create: true
+  become: true
+
+- name: atom | install atom
+  apt:
+    update_cache: true
+    name: atom
+  become: true
