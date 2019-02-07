@@ -1,19 +1,20 @@
 ---
+- block:
+  - name: insomenia | Add repo key
+    apt_key:
+      url: https://insomnia.rest/keys/debian-public.key.asc
+      state: present
 
-- name: Add insomnia repo key
-  become: true
-  apt_key:
-    url: https://insomnia.rest/keys/debian-public.key.asc
-    state: present
+  - name: insomenia | add repo
+    apt_repository:
+      repo: "deb https://dl.bintray.com/getinsomnia/Insomnia /"
+      state: present
 
-- name: add insomnia repo
-  become: true
-  apt_repository:
-    repo: "deb https://dl.bintray.com/getinsomnia/Insomnia /"
-    state: present
+  - name: insomenia | Install package
+    apt:
+      name: "insomnia"
+      state: present
 
-- name: Install insomnia package
   become: true
-  apt:
-    name: "insomnia"
-    state: present
+  tags:
+    - insomnia

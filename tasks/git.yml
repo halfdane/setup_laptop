@@ -1,28 +1,31 @@
 ---
+- block:
+  - name: git | Install packages
+    become: true
+    apt:
+      name: "{{ packages }}"
+      state: present
+    vars:
+      packages:
+      - git
+      - direnv
+      - pinentry-qt
 
-- name: Install direnv packages
-  become: true
-  apt:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-    - git
-    - direnv
-    - pinentry-qt
+  - name: git | Ensure private directory
+    file:
+      dest: '{{ ansible_env.HOME }}/private'
+      state: directory
 
-- name: Ensure private directory
-  file:
-    dest: '{{ ansible_env.HOME }}/private'
-    state: directory
+  - name: git | Use private direnv config
+    template:
+      src: '{{ playbook_dir }}/resources/private_envrc.j2'
+      dest: '{{ ansible_env.HOME }}/private/.envrc'
 
-- name: Use private direnv config
-  template:
-    src: '{{ playbook_dir }}/resources/private_envrc.j2'
-    dest: '{{ ansible_env.HOME }}/private/.envrc'
+  - name: git | Put yubikey in place
+    copy:
+      src: '{{ playbook_dir }}/resources/yubikey_pub.j2'
+      dest: '{{ ansible_env.HOME }}/.ssh/id_rsa_yubikey.pub'
+      mode: 0600
 
-- name: Put yubikey in place
-  copy:
-    src: '{{ playbook_dir }}/resources/yubikey_pub.j2'
-    dest: '{{ ansible_env.HOME }}/.ssh/id_rsa_yubikey.pub'
-    mode: 0600
+  tags:
+  - git

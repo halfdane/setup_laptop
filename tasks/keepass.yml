@@ -1,19 +1,22 @@
 ---
+- block:
 
-- name: install keepass addon repo
+  - name: keepass | install addon repo
+    apt_repository:
+      repo: ppa:dlech/keepass2-plugins
+      state: present
+
+
+  - name: keepass | Install packages
+    apt:
+      name: "{{ packages }}"
+      state: present
+    vars:
+      packages:
+      - keepass2
+      - keepass2-plugin-application-indicator
+      - xdotool
+
   become: true
-  apt_repository:
-    repo: ppa:dlech/keepass2-plugins
-    state: present
-
-
-- name: Install keepass packages
-  become: true
-  apt:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-    - keepass2
-    - keepass2-plugin-application-indicator
-    - xdotool
+  tags:
+    - keepass
