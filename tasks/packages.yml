@@ -13,5 +13,6 @@
     - build-essential
     - linux-headers-{{ ansible_kernel }}
     - debconf-utils
+    - silversearcher-ag
   tags:
     - generic
