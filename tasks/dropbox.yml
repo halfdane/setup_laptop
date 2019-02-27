@@ -25,6 +25,7 @@
     copy:
       content: '{"personal": {"path": "{{ ansible_env.HOME }}/Dropbox", "host": 12345678 }}'
       dest: "{{ ansible_env.HOME }}/.dropbox/info.json"
+      force: false
 
   - block:
     - name: dropbox | Install Dropbox key
