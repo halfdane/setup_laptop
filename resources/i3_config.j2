@@ -22,8 +22,8 @@ bindsym $mod+q kill
 
 # start shortcuts
 bindsym $mod+Return exec --no-startup-id  i3-sensible-terminal
-bindsym $mod+p exec  --no-startup-id "~/bin/ft6_rofi.sh"
-bindsym $mod+d exec --no-startup-id "~/bin/as_ft6.sh mfa-aws-type"
+bindsym $mod+p exec  --no-startup-id "rofi -show combi"
+bindsym $mod+d exec --no-startup-id "~/otto/ft6_toolbox/bin/mfa-aws-type"
 
 # Change window focus with cursor keys:
 bindsym $mod+Left focus left
@@ -97,7 +97,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # Move/focus between screens
 bindsym $mod+Control+h move workspace to output left
 bindsym $mod+Control+l move workspace to output right
-bindsym $mod+m exec --no-startup-id "exec ~/bin/secondScreen"
+bindsym $mod+m exec --no-startup-id kquitapp5 plasmashell; exec --no-startup-id kstart5 plasmashell
 
 # reload/restart the configuration file
 bindsym $mod+Shift+c reload
@@ -111,12 +111,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # Show the first scratchpad window
 #bindsym $mod+minus scratchpad show
-
-
-# start rocketchat and send to scratchpad
-exec --no-startup-id /snap/bin/rocketchat-desktop
-for_window [class="Rocket.Chat+"] move scratchpad
-bindsym $mod+c [class="Rocket.Chat+"] scratchpad show
 
 # start keepass and setup keybindings for scratchpad and autotyping
 exec --no-startup-id /usr/bin/keepass2
